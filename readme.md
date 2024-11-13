@@ -51,27 +51,18 @@ Antes de começar, certifique-se de ter os seguintes itens instalados:
 ## Instalação
   **Clone o repositório usando o comando abaixo:**
 
-        git clone https://github.com/vitucp/hubcreato.git
+    git clone https://github.com/vitucp/scs-aguia.git
         
   **Entre no diretório do projeto:**
 
-        cd hubcreato
-  **Instale as dependências:**
+        cd scs-aguia
+  **Vá ate o diretorio frontend:**
   
-        cd hubcreato &&  npm install
-
-  **Instale as dependências:**
-  
-        cd frontend/src && npm install
+         cd .\frontend\ 
         
-  **Na raiz do projeto (hubcreato), crie um arquivo chamado .env com o seguinte comando:**
-  
-        copy .env.example .env
-
-        
-  **Rodar os Containers com Docker Compose**
+  **instale as dependencias do projeto**
        
-       docker-compose up --build
+       npm install 
        
 
 ## Como Usar
@@ -89,37 +80,60 @@ Antes de começar, certifique-se de ter os seguintes itens instalados:
 
 ## Estrutura de Pastas
 
-> [!WARNING]
-> Ainda Sujeito a alteração.
-
-        ├─── frontend
-    │   ├─── assets             # Arquivos estáticos, como imagens, CSS, etc.
-    │   ├─── src
-    │   │   ├─── controller      # Lógica dos controladores
-    │   │   ├─── middlewares     # Funções intermediárias
-    │   │   ├─── node_modules    # Dependências do projeto
-    │   │   ├─── routers         # Definição de rotas
-    │   │   └─── utils           # Utilitários e funções auxiliares
-    │   └─── views               # Páginas principais
-    │       ├─── home
-    │       ├─── iaMatch
-    │       ├─── login
-    │       ├─── pagePayments
-    │       ├─── pageSignature
-    │       ├─── perfilEnterprise
-    │       ├─── perfilUser
-    │       └─── register
-    └─── hubcreato
-        ├─── app                # Pasta principal do back-end
-        │   ├─── Controllers     # Controladores de requisição
-        │   │   └─── Http        # Lógica HTTP para os controladores
-        │   ├─── Middleware      # Middlewares personalizados
-        │   ├─── Models          # Modelos de dados
-        │   ├─── Routes          # Arquivos de rotas
-        └─── config              # Configurações de ambiente e variáveis
-
-
-
+    
+    ├───backend
+    │   └───scs-aguia
+    │       ├───app                      # Lógica principal da aplicação
+    │       │   ├───Middleware           # Manipulação de requisições HTTP (autenticação, etc.)
+    │       │   └───Models               # Modelos de dados, representando entidades no banco de dados
+    │       │       └───Traits           # Funcionalidades reutilizáveis para os modelos
+    │       ├───config                    # Arquivos de configuração da aplicação (ex.: banco de dados, autenticação)
+    │       ├───database                  # Estrutura de banco de dados
+    │       │   └───migrations            # Scripts para criar e alterar tabelas no banco de dados
+    │       ├───prisma                    # ORM Prisma para interação com o banco de dados
+    │       │   └───migrations            # Migrations do Prisma, que modificam o esquema do banco de dados     
+    │       │       
+    │       ├───public                     # Arquivos estáticos públicos (imagens, scripts, etc.)
+    │       ├───resources                  # Recursos como templates de views
+    │       │   └───views                  # Arquivos de view para renderização no servidor
+    │       └───start                      # Arquivos que inicializam e configuram a aplicação
+    └───frontend
+        ├───assets                        # Arquivos estáticos do frontend
+        │   ├───css                       # Estilos CSS
+        │   ├───img                       # Imagens utilizadas na interface
+        │   │   ├───avatars               # Imagens de avatar
+        │   │   ├───backgrounds           # Fundos e imagens de fundo
+        │   │   ├───banner                # Imagens para banners
+        │   │   ├───elements              # Elementos gráficos para a interface
+        │   │   ├───favicon               # Ícones de favicon
+        │   │   ├───icons                 # Ícones utilizados na interface
+        │   │   │   ├───ico               # Ícones no formato .ico
+        │   │   │   └───unicons            # Ícones Unicons
+        │   │   ├───illustrations         # Ilustrações usadas na interface
+        │   │   ├───layouts               # Layouts de interface
+        │   │   └───veiculos              # Imagens de veículos
+        │   ├───js                         # Scripts JavaScript
+        │   └───vendor                     # Bibliotecas externas e recursos de terceiros
+        │       ├───css                    # CSS de bibliotecas externas
+        │       │   └───pages              # Estilos específicos para páginas externas
+        │       ├───fonts                  # Fontes externas
+        │       ├───js                     # Scripts JavaScript de bibliotecas externas
+        │       └───libs                   # Bibliotecas específicas (gráficos, animações, etc.)
+        │           ├───apex-charts        # Biblioteca para gráficos
+        │           ├───highlight          # Biblioteca para destaque de sintaxe
+        │           ├───jquery             # Biblioteca jQuery
+        │           ├───masonry            # Biblioteca para layout em grade
+        │           ├───perfect-scrollbar  # Biblioteca para scroll perfeito
+        │           └───popper             # Biblioteca de popups (ferramenta de posicionamento)
+        ├───src                            # Código-fonte principal do frontend
+        │   ├───controller                 # Controladores que gerenciam a lógica da interface
+        │   ├───middlewares                # Funções que interceptam e processam requisições
+        │   ├───routers                    # Definições de rotas da aplicação
+        │   └───utils                      # Funções utilitárias reutilizáveis
+        └───views                          # Templates de páginas da interface
+            ├───missoes                    # Páginas ou componentes relacionados às missões
+            └───partials                   # Partes reutilizáveis das páginas (cabeçalhos, rodapés)
+    
 
 
 > [!TIP]
