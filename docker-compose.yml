@@ -1,0 +1,21 @@
+version: '3'
+services:
+  backend:
+    build:
+      context: ./backend/scs-aguia  
+      dockerfile: Dockerfile  
+    container_name: backend
+    ports:
+      - "3131:3131"  
+    environment:
+      - NODE_ENV=production
+
+  frontend:
+    build:
+      context: ./frontend 
+      dockerfile: Dockerfile  
+    container_name: frontend
+    ports:
+      - "83:83" 
+    depends_on:
+      - backend  

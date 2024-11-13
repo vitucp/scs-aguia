@@ -1,0 +1,124 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL") // Conexão com o banco de dados SQLite
+}
+
+
+
+model User {
+  id          Int       @id @default(autoincrement())
+  warOfName   String? 
+  graduation  String? 
+  session     String?
+  name        String?
+  lastName    String?  
+  email       String?  @unique
+  password    String? 
+  whatsapp    String?  @unique
+  tel1        String?
+  cpf         String?  @unique
+  rg          String?  @unique
+  idtMilitary String?  @unique
+  sex         String?
+  status      String?
+  assignment  String?
+  address     Address? @relation 
+  roles       UserRole[]
+  seals       Seal[]  
+
+  @@map("users")
+}
+
+model Address {
+  id              Int    @id @default(autoincrement())
+  street          String?
+  city            String?
+  zipCode         String?
+  streetNumber   String?
+  userId          Int   @unique
+  user            User  @relation(fields: [userId], references: [id])
+
+  @@map("addresses")
+}
+
+model Role{
+  id               Int              @id @default(autoincrement())
+  name             String           @unique
+  users            UserRole[]
+  rolePermissions  RolePermission[] @relation("RolePermissions")
+}
+
+model Permission {
+  id               Int              @id @default(autoincrement())
+  name             String           @unique
+  rolePermissions  RolePermission[] @relation("PermissionRoles")
+}
+
+model UserRole{
+  userId Int
+  roleId Int
+  user   User @relation(fields: [userId], references: [id])
+  role   Role @relation(fields: [roleId], references: [id])
+
+  @@id([userId, roleId])
+}
+
+model RolePermission {
+  roleId       Int
+  permissionId Int
+  role         Role        @relation("RolePermissions", fields: [roleId], references: [id])
+  permission   Permission  @relation("PermissionRoles", fields: [permissionId], references: [id])
+
+  @@id([roleId, permissionId])
+}
+
+model vehicle{
+
+  id                  Int @id @default(autoincrement())
+  nomenclature        String
+  model               String
+  yearOfManufacture   String
+  averageConsumption  String
+  tankCapacity        String
+  passengerCapacity   String
+  platePrefix         String
+  odometer            String
+  status              String
+  qr_code             String
+  img_vehicle         String
+
+  
+  @@map("vehicle")
+}
+
+model Seal{
+  id                Int @id @default(autoincrement())
+  cnh               String
+  categorieCnh      String
+  validityCnh       String 
+  vehicleModel      String
+  chassi            String
+  yearOfManufacture String
+  ipva              String
+  renavam           String
+  plate             String
+  color             String
+  nSeal             String
+  pathDocuments     String
+  pathQr_Code       String?
+  vehicle           String?
+  userId            Int
+  user              User   @relation(fields: [userId], references: [id])
+
+  @@map("seal")
+}
